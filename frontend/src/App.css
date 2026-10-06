@@ -1,0 +1,558 @@
+/* =========================
+   Main Application
+========================= */
+
+#root {
+  min-height: 100vh;
+}
+
+main {
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 40px 0 100px;
+}
+
+/* =========================
+   Header
+========================= */
+
+header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+header h1 {
+  margin: 0 0 10px;
+  font-size: 42px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+header p {
+  margin: 4px 0;
+  color: #5c4a3d;
+  font-size: 18px;
+}
+
+/* =========================
+   Date Selector
+========================= */
+
+.date-selector {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 10px 4px 18px;
+  margin-bottom: 35px;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+}
+
+.date-selector::-webkit-scrollbar {
+  height: 6px;
+}
+
+.date-selector::-webkit-scrollbar-track {
+  background: #eee2b5;
+}
+
+.date-selector::-webkit-scrollbar-thumb {
+  background: #8f7b68;
+}
+
+.date-item {
+  min-width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: #fffaf0;
+  color: #3f3026;
+
+  border: 1px solid #9f8c78;
+  border-radius: 0;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.date-item:hover {
+  background: #f4df91;
+  transform: translateY(-2px);
+}
+
+.date-item.selected {
+  background: #e9c94a;
+  color: #241b15;
+  border: 2px solid #241b15;
+  transform: translateY(-2px);
+}
+
+.date-number {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.date-day {
+  margin-top: 7px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* =========================
+   Sections
+========================= */
+
+section {
+  margin-bottom: 35px;
+}
+
+section h2 {
+  margin: 0 0 18px;
+  color: #2f241d;
+  font-size: 25px;
+}
+
+/* =========================
+   Statistics
+========================= */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.stat-box {
+  min-height: 105px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: #fff8df;
+  border: 1px solid #b8a58e;
+  border-radius: 0;
+
+  box-shadow: 2px 2px 0 rgba(63, 48, 38, 0.12);
+}
+
+.stat-box strong {
+  font-size: 32px;
+  color: #2f241d;
+}
+
+.stat-box span {
+  margin-top: 5px;
+  color: #665447;
+  font-size: 14px;
+}
+
+/* =========================
+   Status Filter
+========================= */
+
+.status-filter-container {
+  margin-bottom: 20px;
+}
+
+#status-filter {
+  margin-left: 8px;
+  padding: 9px 12px;
+
+  background: #fffaf0;
+  color: #2f241d;
+
+  border: 1px solid #8f7b68;
+  border-radius: 0;
+
+  font-size: 14px;
+}
+
+/* =========================
+   Task List
+========================= */
+
+.task-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+
+  margin-bottom: 14px;
+
+  background: #fffaf0;
+  border: 1px solid #b8a58e;
+  border-radius: 0;
+
+  box-shadow: 2px 2px 0 rgba(63, 48, 38, 0.12);
+
+  overflow: hidden;
+}
+
+.task-time {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 22px 10px;
+
+  background: #f4df91;
+  color: #3f3026;
+
+  font-size: 15px;
+  font-weight: 700;
+
+  border-right: 1px solid #b8a58e;
+}
+
+.task-content {
+  padding: 18px 20px;
+}
+
+.task-content h3 {
+  margin: 0 0 8px;
+
+  color: #2f241d;
+  font-size: 20px;
+}
+
+.task-content p {
+  margin: 0 0 14px;
+
+  color: #665447;
+  line-height: 1.5;
+}
+
+.task-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+  margin-bottom: 14px;
+
+  color: #5c4a3d;
+  font-size: 14px;
+}
+
+.task-details select {
+  margin-left: 7px;
+  padding: 7px 10px;
+
+  background: #fffaf0;
+  color: #2f241d;
+
+  border: 1px solid #8f7b68;
+  border-radius: 0;
+}
+
+/* =========================
+   Task Buttons
+========================= */
+
+.task-content button {
+  margin-right: 8px;
+  padding: 8px 15px;
+
+  background: #2f241d;
+  color: #fffaf0;
+
+  border: 1px solid #2f241d;
+  border-radius: 0;
+
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.task-content button:hover {
+  background: #514237;
+}
+
+/* =========================
+   Add Task Button
+========================= */
+
+main > button {
+  display: block;
+
+  margin: 35px 0 0 auto;
+  padding: 13px 22px;
+
+  background: #e9c94a;
+  color: #241b15;
+
+  border: 1px solid #241b15;
+  border-radius: 0;
+
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  box-shadow: 3px 3px 0 #2f241d;
+}
+
+main > button:hover {
+  transform: translate(1px, 1px);
+  box-shadow: 2px 2px 0 #2f241d;
+}
+
+/* =========================
+   Messages
+========================= */
+
+main > section p {
+  color: #665447;
+}
+
+main > section > p {
+  padding: 20px;
+
+  background: #fff8df;
+  border: 1px solid #b8a58e;
+}
+
+/* =========================
+   Forms
+========================= */
+
+form {
+  width: min(650px, 100%);
+  margin: 0 auto;
+  padding: 28px;
+
+  background: #fffaf0;
+
+  border: 1px solid #b8a58e;
+  border-radius: 0;
+
+  box-shadow: 3px 3px 0 rgba(63, 48, 38, 0.12);
+}
+
+form > div {
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #3f3026;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+form input,
+form textarea,
+form select {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 11px 12px;
+
+  background: #fffdf7;
+  color: #2f241d;
+
+  border: 1px solid #9f8c78;
+  border-radius: 0;
+
+  font: inherit;
+}
+
+form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+  outline: 2px solid #e9c94a;
+  outline-offset: 1px;
+}
+
+form button {
+  padding: 12px 20px;
+
+  background: #e9c94a;
+  color: #241b15;
+
+  border: 1px solid #241b15;
+  border-radius: 0;
+
+  cursor: pointer;
+
+  font-weight: 700;
+}
+
+form button:hover {
+  background: #dfbe35;
+}
+
+form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   Form Page Header
+========================= */
+
+.form-page-header {
+  position: relative;
+}
+
+.back-button {
+  display: inline-block;
+
+  margin-bottom: 25px;
+  padding: 9px 14px;
+
+  background: transparent;
+  color: #2f241d;
+
+  border: 1px solid #8f7b68;
+  border-radius: 0;
+
+  cursor: pointer;
+
+  font-size: 14px;
+}
+
+.back-button:hover {
+  background: #f4df91;
+}
+
+.form-page-header p {
+  margin-bottom: 6px;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* =========================
+   Form Row
+========================= */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* =========================
+   Form Messages
+========================= */
+
+.form-message {
+  padding: 12px 14px;
+  margin-bottom: 18px;
+
+  border: 1px solid;
+}
+
+.error-message {
+  background: #f8dddd;
+  color: #6b2424;
+  border-color: #b76b6b;
+}
+
+.success-message {
+  background: #e4efd8;
+  color: #31552a;
+  border-color: #779b68;
+}
+
+/* =========================
+   Form Submit Button
+========================= */
+
+.form-submit-button {
+  width: 100%;
+  padding: 13px 20px;
+
+  background: #e9c94a;
+  color: #241b15;
+
+  border: 1px solid #241b15;
+  border-radius: 0;
+
+  cursor: pointer;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.form-submit-button:hover {
+  background: #dfbe35;
+}
+
+.form-submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   Responsive Design
+========================= */
+
+@media (max-width: 700px) {
+  main {
+    width: 94%;
+    padding-top: 25px;
+  }
+
+  header h1 {
+    font-size: 32px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .task-card {
+    grid-template-columns: 75px 1fr;
+  }
+
+  .task-details {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .task-content {
+    padding: 15px;
+  }
+
+  .date-item {
+    min-width: 68px;
+    height: 68px;
+  }
+
+  form {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .form-page-header h1 {
+    font-size: 32px;
+  }
+}
