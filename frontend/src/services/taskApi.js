@@ -1,7 +1,7 @@
-const API_URL = "http://localhost:8080/api/tasks";
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  "http://localhost:8080/api/tasks";
 
-// Get all tasks.
-// If a date is provided, get only tasks for that date.
 export async function getTasks(date = "") {
   let url = API_URL;
 
@@ -18,7 +18,6 @@ export async function getTasks(date = "") {
   return response.json();
 }
 
-// Get one task using its ID.
 export async function getTask(id) {
   const response = await fetch(`${API_URL}/${id}`);
 
@@ -29,7 +28,6 @@ export async function getTask(id) {
   return response.json();
 }
 
-// Create a new task.
 export async function createTask(task) {
   const response = await fetch(API_URL, {
     method: "POST",
@@ -47,7 +45,6 @@ export async function createTask(task) {
   return response.json();
 }
 
-// Update an existing task.
 export async function updateTask(id, task) {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
@@ -65,7 +62,6 @@ export async function updateTask(id, task) {
   return response.json();
 }
 
-// Delete a task.
 export async function deleteTask(id) {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "DELETE",

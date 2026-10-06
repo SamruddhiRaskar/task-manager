@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/joho/godotenv"
 
@@ -14,7 +15,7 @@ import (
 func main() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("Error loading .env file")
+		log.Println("No .env file found. Using environment variables.")
 	}
 
 	db, err := database.Connect()
@@ -30,19 +31,31 @@ func main() {
 	mux := routes.SetupRoutes(taskHandler)
 	handler := enableCORS(mux)
 
-	log.Println("Server is running on http://localhost:8080")
+	port := os.Getenv("PORT")
 
-	err = http.ListenAndServe(":8080", handler)
+	if port == "" {
+		port = "8080"
+	}
+
+	log.Printf("Server is running on port %s", port)
+
+	err = http.ListenAndServe(":"+port, handler)
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
 func enableCORS(next http.Handler) http.Handler {
+	frontendURL := os.Getenv("FRONTEND_URL")
+
+	if frontendURL == "" {
+		frontendURL = "http://localhost:5173"
+	}
+
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set(
 			"Access-Control-Allow-Origin",
-			"http://localhost:5173",
+			frontendURL,
 		)
 
 		w.Header().Set(
