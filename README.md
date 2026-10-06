@@ -661,3 +661,36 @@ The project combines:
 * Render for backend deployment
 
 The project demonstrates practical concepts including CRUD operations, REST APIs, database integration, validation, error handling, CORS, environment variables, and production deployment.
+
+
+## Challenges and Solutions
+
+### 1. Frontend and Backend Integration
+
+**Challenge:** Connecting the React frontend with the Go REST API and ensuring that task operations were correctly sent to the backend.
+
+**Solution:** Implemented API service functions using the Fetch API for creating, retrieving, updating, and deleting tasks.
+
+### 2. PostgreSQL Database Integration
+
+**Challenge:** Storing task data reliably and connecting the Go backend with PostgreSQL.
+
+**Solution:** Used the `pgx` PostgreSQL driver and implemented database queries for task CRUD operations.
+
+### 3. CORS Configuration
+
+**Challenge:** After deploying the frontend and backend separately, browser requests were initially blocked because the frontend origin did not match the backend's allowed CORS origin.
+
+**Solution:** Configured the `FRONTEND_URL` environment variable on Render with the correct Vercel frontend URL and configured CORS in the Go backend.
+
+### 4. Production Environment Configuration
+
+**Challenge:** The local development environment and production environment use different API URLs and configuration values.
+
+**Solution:** Used environment variables such as `VITE_API_URL`, `DATABASE_URL`, and `FRONTEND_URL` so that local and production configurations can be managed separately.
+
+### 5. Separate Frontend and Backend Deployment
+
+**Challenge:** Deploying a React frontend and Go backend separately while maintaining communication between them.
+
+**Solution:** Deployed the React frontend on Vercel and the Go REST API on Render, then configured the frontend API URL and backend CORS settings to connect the two services.
